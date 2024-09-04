@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -6,7 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private GamePlayWidget gameplayWidgetPrefab;
-    [SerializeField] private float _speed = 10;
+    [SerializeField] private float speed = 10;
+    [SerializeField] private float bodyTurnSpeed = 10f;
     [SerializeField] private ViewCamera viewCameraPrefab;
     private GamePlayWidget _gamePlayWidget;
     private CharacterController _characterController;
@@ -14,6 +16,7 @@ public class Player : MonoBehaviour
     
     private Animator _animator;
     private Vector2 _moveInput;
+    private Vector2 _aimImput;
 
 
     private void Awake()
@@ -21,12 +24,17 @@ public class Player : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _gamePlayWidget = Instantiate(gameplayWidgetPrefab);
-        _gamePlayWidget.MoveStick.OnInputUpdated += InputUpdated;
+        _gamePlayWidget.MoveStick.OnInputUpdated += MoveInputUpdated;
+        _gamePlayWidget.AimStick.OnInputUpdated += AimInputUpdated;
+       // _gamePlayWidget.ViewStick.OnInputUpdated += ViewInputUpdated;
         _viewCamera = Instantiate(viewCameraPrefab);
         _viewCamera.SetFollowParent(transform);
     }
-
-    private void InputUpdated(Vector2 inputVal)
+   private void AimInputUpdated(Vector2 inputVal)
+    {
+        _aimImput = inputVal;
+    }
+    private void MoveInputUpdated(Vector2 inputVal)
     {
         _moveInput = inputVal;
     }
@@ -40,6 +48,21 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _characterController.Move(new Vector3(_moveInput.x, 0f, _moveInput.y) * (_speed * Time.deltaTime));
+        Vector3 moveDir = _viewCamera.InputToWorldDir(_moveInput);
+        _characterController.Move(moveDir * (speed * Time.deltaTime));
+
+        Vector3 aimDir = _viewCamera.InputToWorldDir(_aimImput);
+        if (aimDir == Vector3.zero)
+        {
+            aimDir = moveDir;
+            _viewCamera.AddYawInput(_moveInput.x);
+        }
+
+        if (aimDir != Vector3.zero)
+        {
+            Quaternion goalRot = Quaternion.LookRotation(aimDir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, goalRot, Time.deltaTime * bodyTurnSpeed);
+        }
+      
     }
 }
