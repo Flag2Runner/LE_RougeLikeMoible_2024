@@ -10,11 +10,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 10;
     [SerializeField] private float bodyTurnSpeed = 10f;
     [SerializeField] private ViewCamera viewCameraPrefab;
+    [SerializeField] private float animTurnLerpScale = 5f;
+    
     private GamePlayWidget _gamePlayWidget;
     private CharacterController _characterController;
     private ViewCamera _viewCamera;
     
     private Animator _animator;
+    private float _animTurnSpeed;
     private Vector2 _moveInput;
     private Vector2 _aimImput;
 
@@ -70,8 +73,9 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, goalRot, Time.deltaTime * bodyTurnSpeed);
             angleDelta = Vector3.SignedAngle(transform.forward,prevDir, Vector3.up);
         }
-        
-        _animator.SetFloat(animTurnId, angleDelta/Time.deltaTime);
+
+        _animTurnSpeed = Mathf.Lerp(_animTurnSpeed, angleDelta / Time.deltaTime, Time.deltaTime * animTurnLerpScale);
+        _animator.SetFloat(animTurnId, _animTurnSpeed);
 
         float animFwdAmt = Vector3.Dot(moveDir, transform.forward);
         float animRightAmt = Vector3.Dot(moveDir, transform.right);
