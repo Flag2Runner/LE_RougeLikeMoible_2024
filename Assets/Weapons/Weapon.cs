@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour, ISocketInterface
 {
     [SerializeField] string attachSocketName;
+    [SerializeField] private AnimatorOverrideController overrideController;
     public GameObject Owner
     {
         get; 
@@ -23,6 +24,11 @@ public abstract class Weapon : MonoBehaviour, ISocketInterface
     public void Equip()
     {
         gameObject.SetActive(true);
+        Animator ownerAnimator = Owner.GetComponent<Animator>();
+        if (ownerAnimator && overrideController)
+        {
+            ownerAnimator.runtimeAnimatorController = overrideController;
+        }
     }
 
     public void UnEquip()

@@ -3,11 +3,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IPointerClickHandler
 {
     public delegate void InputUpdateDelegate(Vector2 inputVal);
 
     public event InputUpdateDelegate OnInputUpdated;
+    public event InputUpdateDelegate OnInputClicked;
     [SerializeField] private RectTransform rangeTransform;
     [SerializeField] private RectTransform thumbStickTransform;
     [SerializeField] private float deadZone = 0.2f;
@@ -44,5 +45,10 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         
         OnInputUpdated?.Invoke(offset/_range);
 
+    }
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnInputClicked.Invoke(Vector2.zero);
     }
 }

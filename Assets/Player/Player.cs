@@ -17,11 +17,12 @@ public class Player : MonoBehaviour
     private GamePlayWidget _gamePlayWidget;
     private CharacterController _characterController;
     private ViewCamera _viewCamera;
+    private InventoryComponent _inventory;
     
     private Animator _animator;
     private float _animTurnSpeed;
     private Vector2 _moveInput;
-    private Vector2 _aimImput;
+    private Vector2 _aimInput;
 
     private static int animFwdId = Animator.StringToHash("ForwardAmt");
     private static int animRightrdId = Animator.StringToHash("RightAmt");
@@ -32,16 +33,25 @@ public class Player : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _inventory = GetComponent<InventoryComponent>();
         _gamePlayWidget = Instantiate(gameplayWidgetPrefab);
         _gamePlayWidget.MoveStick.OnInputUpdated += MoveInputUpdated;
         _gamePlayWidget.AimStick.OnInputUpdated += AimInputUpdated;
+        _gamePlayWidget.AimStick.OnInputClicked += AimInputClicked;
        // _gamePlayWidget.ViewStick.OnInputUpdated += ViewInputUpdated;
         _viewCamera = Instantiate(viewCameraPrefab);
         _viewCamera.SetFollowParent(transform);
     }
-   private void AimInputUpdated(Vector2 inputVal)
+
+    private void AimInputClicked(Vector2 inputval)
     {
-        _aimImput = inputVal;
+        _inventory.EquipNextWeapon();
+    }
+
+    private void AimInputUpdated(Vector2 inputVal)
+    {
+
+        _aimInput = inputVal;
     }
     private void MoveInputUpdated(Vector2 inputVal)
     {
@@ -60,7 +70,7 @@ public class Player : MonoBehaviour
         Vector3 moveDir = _viewCamera.InputToWorldDir(_moveInput);
         _characterController.Move(moveDir * (speed * Time.deltaTime));
 
-        Vector3 aimDir = _viewCamera.InputToWorldDir(_aimImput);
+        Vector3 aimDir = _viewCamera.InputToWorldDir(_aimInput);
         if (aimDir == Vector3.zero)
         {
             aimDir = moveDir;
