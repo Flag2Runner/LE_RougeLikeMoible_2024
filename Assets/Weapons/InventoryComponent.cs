@@ -28,7 +28,7 @@ public class InventoryComponent : MonoBehaviour
         if (_weapons.Count == 0) return;
         
         int nextWeaponIndex = _currentWeaponIndex + 1;
-        if (nextWeaponIndex > _weapons.Count)
+        if (nextWeaponIndex >= _weapons.Count)
         {
             nextWeaponIndex = 0;
         }
@@ -36,10 +36,18 @@ public class InventoryComponent : MonoBehaviour
         _weapons[nextWeaponIndex].Equip();
         
         //unequip the old one
-        if(_currentWeaponIndex > 0 && _currentWeaponIndex < _weapons.Count)
+        if(_currentWeaponIndex >= 0 && _currentWeaponIndex < _weapons.Count)
         {
             _weapons[_currentWeaponIndex].UnEquip();
         }
         _currentWeaponIndex = nextWeaponIndex;
+    }
+
+    public void FireCurrentActiveWeapon()
+    {
+        if(_currentWeaponIndex >= 0 && _currentWeaponIndex <= _weapons.Count)
+        {
+            _weapons[_currentWeaponIndex].Attack();
+        }
     }
 }

@@ -8,13 +8,15 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public delegate void InputUpdateDelegate(Vector2 inputVal);
 
     public event InputUpdateDelegate OnInputUpdated;
-    public event InputUpdateDelegate OnInputClicked;
+    public event Action OnInputClicked;
+    
     [SerializeField] private RectTransform rangeTransform;
     [SerializeField] private RectTransform thumbStickTransform;
     [SerializeField] private float deadZone = 0.2f;
     
 
     private float _range;
+    private bool _bWasDragging = false;
 
     private void Awake()
     {
@@ -33,10 +35,16 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         rangeTransform.localPosition = Vector2.zero;
         thumbStickTransform.localPosition = Vector2.zero;
         OnInputUpdated?.Invoke(Vector2.zero);
+        if (!_bWasDragging)
+        {
+            OnInputClicked?.Invoke();
+        }
+        _bWasDragging = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        _bWasDragging = true;
         Vector2 offset = eventData.position - eventData.pressPosition;
         thumbStickTransform.position = eventData.pressPosition + offset;
         Vector2 input = offset / _range;
@@ -44,11 +52,9 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             return;
         
         OnInputUpdated?.Invoke(offset/_range);
-
     }
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnInputClicked.Invoke(Vector2.zero);
     }
 }

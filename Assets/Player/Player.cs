@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SocketManager))]
 [RequireComponent(typeof(InventoryComponent))]
+[RequireComponent(typeof(HealthComponent))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private GamePlayWidget gameplayWidgetPrefab;
@@ -24,9 +25,11 @@ public class Player : MonoBehaviour
     private Vector2 _moveInput;
     private Vector2 _aimInput;
 
-    private static int animFwdId = Animator.StringToHash("ForwardAmt");
-    private static int animRightrdId = Animator.StringToHash("RightAmt");
-    private static int animTurnId = Animator.StringToHash("TurnAmt");
+    private static readonly int animFwdId = Animator.StringToHash("ForwardAmt");
+    private static readonly int animRightrdId = Animator.StringToHash("RightAmt");
+    private static readonly int animTurnId = Animator.StringToHash("TurnAmt");
+    private static readonly int switchWeaponId = Animator.StringToHash("SwitchWeapon");
+    private static readonly int FiringId = Animator.StringToHash("Firing");
 
 
     private void Awake()
@@ -43,15 +46,26 @@ public class Player : MonoBehaviour
         _viewCamera.SetFollowParent(transform);
     }
 
-    private void AimInputClicked(Vector2 inputval)
+    private void AimInputClicked()
     {
-        _inventory.EquipNextWeapon();
+        _animator.SetTrigger(switchWeaponId);
+    }
+
+    public void WeaponSwitchPoint()
+    {
+        _inventory.EquipNextWeapon(); 
+    }
+
+    public void AttackPoint()
+    {
+        _inventory.FireCurrentActiveWeapon();
     }
 
     private void AimInputUpdated(Vector2 inputVal)
     {
 
         _aimInput = inputVal;
+        _animator.SetBool(FiringId, _aimInput != Vector2.zero);
     }
     private void MoveInputUpdated(Vector2 inputVal)
     {
