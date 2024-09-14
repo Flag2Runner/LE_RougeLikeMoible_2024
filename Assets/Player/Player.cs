@@ -1,5 +1,3 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -29,7 +27,7 @@ public class Player : MonoBehaviour
     private static readonly int animRightrdId = Animator.StringToHash("RightAmt");
     private static readonly int animTurnId = Animator.StringToHash("TurnAmt");
     private static readonly int switchWeaponId = Animator.StringToHash("SwitchWeapon");
-    private static readonly int FiringId = Animator.StringToHash("Firing");
+    private static readonly int firingId = Animator.StringToHash("Firing");
 
 
     private void Awake()
@@ -65,17 +63,11 @@ public class Player : MonoBehaviour
     {
 
         _aimInput = inputVal;
-        _animator.SetBool(FiringId, _aimInput != Vector2.zero);
+        _animator.SetBool(firingId, _aimInput != Vector2.zero);
     }
     private void MoveInputUpdated(Vector2 inputVal)
     {
         _moveInput = inputVal;
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

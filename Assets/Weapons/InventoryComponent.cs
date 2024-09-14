@@ -7,7 +7,7 @@ public class InventoryComponent : MonoBehaviour
 {
     [SerializeField] private Weapon[] initialWeaponPrefabs;
 
-    List<Weapon> _weapons = new List<Weapon>();
+    List<Weapon> _weapons = new();
 
     private int _currentWeaponIndex = -1;
 

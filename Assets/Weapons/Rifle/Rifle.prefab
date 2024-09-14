@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachSocketName: Rifle
   overrideController: {fileID: 22100000, guid: 524f6f313fba3444bbcc92d7baa13eea, type: 2}
+  damage: 5
 --- !u!114 &6203353073955234085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,8 +67,8 @@ MonoBehaviour:
   aimMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  bOveride: 0
-  heightOveride: 1.5
+  bOverrides: 1
+  heightOverride: 1.5
   fwdOffset: 0.5
 --- !u!1 &8443495304558193271
 GameObject:

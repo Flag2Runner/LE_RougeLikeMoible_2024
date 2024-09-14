@@ -16,7 +16,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     
 
     private float _range;
-    private bool _bWasDragging = false;
+    private bool _bWasDragging;
 
     private void Awake()
     {
