@@ -80,7 +80,7 @@ MonoBehaviour:
   pitchTransform: {fileID: 577123544890217668}
   viewCamera: {fileID: 9177768102614831990}
   armLength: 12
-  cameraTurnSpeed: 30
+  cameraTurnSpeed: 1
 --- !u!1 &6708806763557763474
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class ViewCamera : MonoBehaviour
     [SerializeField] private Transform pitchTransform;
     [SerializeField] private Camera viewCamera;
     [SerializeField] private float armLength = 12f;
-    [SerializeField] private float cameraTurnSpeed = 30f;
+    [SerializeField] private float cameraTurnSpeed = 1f;
 
     private Transform _parentTransform;
 
@@ -23,7 +23,7 @@ public class ViewCamera : MonoBehaviour
 
     public void SetFollowParent(Transform parentTransform)
     {
-        _parentTransform = parentTransform;
+        //_parentTransform = parentTransform;
     }
 
     Vector3 GetViewRightDir()
@@ -39,12 +39,6 @@ public class ViewCamera : MonoBehaviour
     public Vector3 InputToWorldDir(Vector2 input)
     {
         return GetViewRightDir() * input.x + GetViewUpDir() * input.y;
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
