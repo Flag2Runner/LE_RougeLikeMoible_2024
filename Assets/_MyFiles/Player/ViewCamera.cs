@@ -9,7 +9,7 @@ public class ViewCamera : MonoBehaviour
     [SerializeField] private Transform pitchTransform;
     [SerializeField] private Camera viewCamera;
     [SerializeField] private float armLength = 12f;
-    [SerializeField] private float cameraTurnSpeed = 1f;
+    [SerializeField] private float cameraTurnSpeed = 30f;
 
     private Transform _parentTransform;
 

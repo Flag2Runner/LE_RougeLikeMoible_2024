@@ -98,9 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayWidgetPrefab: {fileID: -3730462047550540326, guid: 00e29855b47ed1a42a4d5a3170246ebe, type: 3}
-  speed: 10
+  speed: 4
   bodyTurnSpeed: 10
   viewCameraPrefab: {fileID: 8777934544548885533, guid: 01eac9e596d87b04489185626e2f18ca, type: 3}
+  gameManager: {fileID: 8826443210817496760, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
   animTurnLerpScale: 5
 --- !u!114 &4566802234056554558
 MonoBehaviour:

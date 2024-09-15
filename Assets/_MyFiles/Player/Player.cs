@@ -12,15 +12,17 @@ using Debug = UnityEngine.Debug;
 public class Player : MonoBehaviour
 {
     [SerializeField] private GamePlayWidget gameplayWidgetPrefab;
-    [SerializeField] private float speed = 10;
+    [SerializeField] private float speed = 4;
     [SerializeField] private float bodyTurnSpeed = 10f;
     [SerializeField] private ViewCamera viewCameraPrefab;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float animTurnLerpScale = 5f;
     
     private GamePlayWidget _gamePlayWidget;
     private CharacterController _characterController;
     private ViewCamera _viewCamera;
     private InventoryComponent _inventory;
+    private GameManager _gameManager;
     
     private Animator _animator;
     private float _animTurnSpeed;
@@ -46,6 +48,14 @@ public class Player : MonoBehaviour
        // _gamePlayWidget.ViewStick.OnInputUpdated += ViewInputUpdated;
         _viewCamera = Instantiate(viewCameraPrefab);
         _viewCamera.SetFollowParent(transform);
+        if (gameManager != null)
+        {
+            _gameManager = Instantiate(gameManager);
+            return;
+        }
+        Debug.Log("GameManager is Null set the prefab Var...");
+        
+            
     }
 
     private void AimInputClicked()
@@ -74,7 +84,7 @@ public class Player : MonoBehaviour
         _moveInput = inputVal;
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         switch(other.name)
         {
@@ -95,7 +105,7 @@ public class Player : MonoBehaviour
                 Destroy(other);
                 break;
         }
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -107,7 +117,7 @@ public class Player : MonoBehaviour
         if (aimDir == Vector3.zero)
         {
             aimDir = moveDir;
-            _viewCamera.AddYawInput(_moveInput.x);
+            //_viewCamera.AddYawInput(_moveInput.x);
         }
 
         float angleDelta = 0f;
