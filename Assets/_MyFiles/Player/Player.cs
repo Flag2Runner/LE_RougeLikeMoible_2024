@@ -15,14 +15,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 4;
     [SerializeField] private float bodyTurnSpeed = 10f;
     [SerializeField] private ViewCamera viewCameraPrefab;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private float animTurnLerpScale = 5f;
     
     private GamePlayWidget _gamePlayWidget;
     private CharacterController _characterController;
     private ViewCamera _viewCamera;
     private InventoryComponent _inventory;
-    private GameManager _gameManager;
     
     private Animator _animator;
     private float _animTurnSpeed;
@@ -48,12 +46,6 @@ public class Player : MonoBehaviour
        // _gamePlayWidget.ViewStick.OnInputUpdated += ViewInputUpdated;
         _viewCamera = Instantiate(viewCameraPrefab);
         _viewCamera.SetFollowParent(transform);
-        if (gameManager != null)
-        {
-            _gameManager = Instantiate(gameManager);
-            return;
-        }
-        Debug.Log("GameManager is Null set the prefab Var...");
         
             
     }
@@ -89,19 +81,19 @@ public class Player : MonoBehaviour
         switch(other.name)
         {
             case "DoorN":
-                Debug.Log("Move Camera North of Room x Meeters");
+                Debug.Log("Move Camera North of Room x Meters");
                 //Destroy(other);
                 break;
             case "DoorS":
-                Debug.Log("Move Camera South of Room x Meeters");
+                Debug.Log("Move Camera South of Room x Meters");
                 //Destroy(other);
                 break;
             case "DoorW":
-                Debug.Log("Move Camera West of Room x Meeters");
+                Debug.Log("Move Camera West of Room x Meters");
                 //Destroy(other);
                 break;
             case "DoorE":
-                Debug.Log("Move Camera East of Room x Meeters");
+                Debug.Log("Move Camera East of Room x Meters");
                 //Destroy(other);
                 break;
         }

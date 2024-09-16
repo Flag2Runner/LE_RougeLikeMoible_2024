@@ -2,31 +2,40 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
+class WallDoor
+{
+    [SerializeField] public GameObject wall;
+    
+    [SerializeField] public GameObject door;
+
+    [SerializeField] public bool keepDoor;
+}
+
 public class Room : MonoBehaviour
 {
+    [SerializeField] private WallDoor[] _wallsDoors;
     [SerializeField] private string roomName = "Room";
     [SerializeField] private int height, width;
     [SerializeField] private Vector2 roomLocation = Vector2.zero;
-    [SerializeField] private GameObject[] walls; //0->North 1->South 2->East 3->West
-    [SerializeField] private GameObject[] doors;
-    [SerializeField] private bool[] testStatus;
+    [SerializeField] private GameObject cameraTarget;
+
+    public GameObject GetCameraTarget()
+    {
+        return cameraTarget;
+    }
 
     public Vector2 GetRoomLocation()
     {
         return roomLocation;
     }
 
-    private void Start()
+    public void UpdateRoom(bool[] keepDoor)
     {
-        UpdateRoom(testStatus);
-    }
-
-    void UpdateRoom(bool[] status)
-    {
-        for (int i = 0; i < status.Length; i++)
+        for (int i = 0; i < keepDoor.Length; i++)
         {
-            doors[i].SetActive(status[i]);
-            walls[i].SetActive(!status[i]);
+            _wallsDoors[i].door.SetActive(keepDoor[i]);
+            _wallsDoors[i].wall.SetActive(!keepDoor[i]);
         }
     }
 
