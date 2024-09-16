@@ -82,18 +82,18 @@ public class RoomManager : MonoBehaviour
                 }
                 else
                 {
-                    //Down or Right
-                    if (newCell - 1 == currentCell)
+                    //up or left
+                    if (newCell + 1 == currentCell)
                     {
-                        dungeon[currentCell].status[2] = true;
-                        currentCell = newCell;
                         dungeon[currentCell].status[3] = true;
+                        currentCell = newCell;
+                        dungeon[currentCell].status[2] = true;
                     }
                     else
                     {
-                        dungeon[currentCell].status[1] = true;
-                        currentCell = newCell;
                         dungeon[currentCell].status[0] = true;
+                        currentCell = newCell;
+                        dungeon[currentCell].status[1] = true;
                     }
                 }
             }

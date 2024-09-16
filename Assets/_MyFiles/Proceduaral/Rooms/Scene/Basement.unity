@@ -497,6 +497,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1294356363346620841, guid: 68f19fa9309fa944899a375933b5aad8, type: 3}
+      propertyPath: 'testStatus.Array.data[0]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294356363346620841, guid: 68f19fa9309fa944899a375933b5aad8, type: 3}
+      propertyPath: 'testStatus.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294356363346620841, guid: 68f19fa9309fa944899a375933b5aad8, type: 3}
+      propertyPath: 'testStatus.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294356363346620841, guid: 68f19fa9309fa944899a375933b5aad8, type: 3}
+      propertyPath: 'testStatus.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2297704245558318784, guid: 68f19fa9309fa944899a375933b5aad8, type: 3}
       propertyPath: m_Name
       value: Room
