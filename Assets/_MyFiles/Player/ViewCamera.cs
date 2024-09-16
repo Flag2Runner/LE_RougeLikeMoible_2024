@@ -1,5 +1,6 @@
 using System;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 [ExecuteAlways]
 
@@ -10,6 +11,7 @@ public class ViewCamera : MonoBehaviour
     [SerializeField] private Camera viewCamera;
     [SerializeField] private float armLength = 12f;
     [SerializeField] private float cameraTurnSpeed = 30f;
+    [SerializeField] private float CameraTurnLerpScale = 5f;
 
     private Transform _parentTransform;
 
@@ -17,10 +19,12 @@ public class ViewCamera : MonoBehaviour
     {
         return viewCamera;
     }
-    
-    
 
-
+    public void MoveCamera(Vector2 value)
+    {
+        viewCamera.transform.position.Set(value.x, 0, value.x);   
+    }
+    
     public void SetFollowParent(Transform parentTransform)
     {
         //_parentTransform = parentTransform;

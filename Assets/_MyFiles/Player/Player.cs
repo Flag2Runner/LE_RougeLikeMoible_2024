@@ -84,28 +84,28 @@ public class Player : MonoBehaviour
         _moveInput = inputVal;
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         switch(other.name)
         {
             case "DoorN":
                 Debug.Log("Move Camera North of Room x Meeters");
-                Destroy(other);
+                //Destroy(other);
                 break;
             case "DoorS":
                 Debug.Log("Move Camera South of Room x Meeters");
-                Destroy(other);
+                //Destroy(other);
                 break;
             case "DoorW":
                 Debug.Log("Move Camera West of Room x Meeters");
-                Destroy(other);
+                //Destroy(other);
                 break;
             case "DoorE":
                 Debug.Log("Move Camera East of Room x Meeters");
-                Destroy(other);
+                //Destroy(other);
                 break;
         }
-    }*/
+    }
 
     // Update is called once per frame
     void Update()
