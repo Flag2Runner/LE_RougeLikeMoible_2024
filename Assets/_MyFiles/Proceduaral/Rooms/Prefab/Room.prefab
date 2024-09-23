@@ -1468,19 +1468,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6849acd19deed8146ae818e04aae5f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallsDoors:
+  wallsDoors:
   - wall: {fileID: 4711143265672620217}
     door: {fileID: 3650894469410523086}
-    keepDoor: 1
   - wall: {fileID: 2780185479537407895}
     door: {fileID: 8966366548320265265}
-    keepDoor: 1
   - wall: {fileID: 7932465589649717367}
     door: {fileID: 3643676506625048419}
-    keepDoor: 1
   - wall: {fileID: 3540058332531503894}
     door: {fileID: 4103443330491378103}
-    keepDoor: 1
   roomName: Start
   height: 10
   width: 17

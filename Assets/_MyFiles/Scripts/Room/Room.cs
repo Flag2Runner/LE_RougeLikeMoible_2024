@@ -1,20 +1,21 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
-class WallDoor
+public class WallDoor
 {
     [SerializeField] public GameObject wall;
     
     [SerializeField] public GameObject door;
-
-    [SerializeField] public bool keepDoor;
 }
 
 public class Room : MonoBehaviour
 {
-    [SerializeField] private WallDoor[] _wallsDoors;
+    [SerializeField] private WallDoor[] wallsDoors;
+    private WallDoor[] _wallDoors = new WallDoor[4];
+    
+
+    public WallDoor[] WallsDoors => wallsDoors;
     [SerializeField] private string roomName = "Room";
     [SerializeField] private int height, width;
     [SerializeField] private Vector2 roomLocation = Vector2.zero;
@@ -32,11 +33,14 @@ public class Room : MonoBehaviour
 
     public void UpdateRoom(bool[] keepDoor)
     {
-        for (int i = 0; i < keepDoor.Length; i++)
+        if (keepDoor.Length != wallsDoors.Length) return;
+        
+        for (int i = 0; i < wallsDoors.Length; i++)
         {
-            _wallsDoors[i].door.SetActive(keepDoor[i]);
-            _wallsDoors[i].wall.SetActive(!keepDoor[i]);
+            wallsDoors[i].door.SetActive(keepDoor[i]);
+            wallsDoors[i].wall.SetActive(!keepDoor[i]);
         }
+
     }
 
     public Vector3 GetRoomCenter()

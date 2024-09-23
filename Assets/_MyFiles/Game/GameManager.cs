@@ -9,11 +9,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerSpawnTarget;
 
     private GameObject _player;
-    
+
+    public RoomManager GetRoomManager()
+    {
+        return _roomManager;
+    }
+
     private void Awake()
     {
         _roomManager = GetComponent<RoomManager>();
         CreatePlayer();
+        
     }
 
     private void CreatePlayer()

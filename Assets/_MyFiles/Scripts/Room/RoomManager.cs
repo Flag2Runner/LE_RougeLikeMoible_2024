@@ -25,6 +25,7 @@ public class RoomManager : MonoBehaviour
     {
         Algorithim();
     }
+    
 
     private void GenterateDungeon()
     {
@@ -32,8 +33,10 @@ public class RoomManager : MonoBehaviour
         {
             for (int j = 0; j < size.y; j++)
             {
-                var newRoom = Instantiate(room, new Vector3(i * offset.x, 0, j * offset.y), Quaternion.identity, transform).GetComponent<Room>();
+                var newRoom = Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<Room>();
                 newRoom.UpdateRoom(dungeon[Mathf.FloorToInt(i+j*size.x)].bKeepDoor);
+                
+                newRoom.name += $" {i}-{j}";
             }
         }
     }
@@ -135,13 +138,13 @@ public class RoomManager : MonoBehaviour
         }
         
         //Check East neighbour
-        if ((cell+1) % size.x < 0 && !dungeon[Mathf.FloorToInt(cell+1)].bIsVisited)
+        if ((cell+1) % size.x != 0 && !dungeon[Mathf.FloorToInt(cell+1)].bIsVisited)
         {
             neighbors.Add(Mathf.FloorToInt(cell+1));
         }
         
         //Check West neighbour
-        if ((cell+1) % size.x != 0 && !dungeon[Mathf.FloorToInt(cell - 1)].bIsVisited)
+        if (cell % size.x != 0 && !dungeon[Mathf.FloorToInt(cell - 1)].bIsVisited)
         {
             neighbors.Add(Mathf.FloorToInt(cell-1));
         }

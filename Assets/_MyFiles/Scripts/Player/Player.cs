@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private CharacterController _characterController;
     private ViewCamera _viewCamera;
     private InventoryComponent _inventory;
+    private RoomManager _roomManager;
     
     private Animator _animator;
     private float _animTurnSpeed;
@@ -46,8 +47,12 @@ public class Player : MonoBehaviour
        // _gamePlayWidget.ViewStick.OnInputUpdated += ViewInputUpdated;
         _viewCamera = Instantiate(viewCameraPrefab);
         _viewCamera.SetFollowParent(transform);
-        
             
+    }
+
+    public void SetRoomManager(RoomManager roomManager)
+    {
+        _roomManager = roomManager;
     }
 
     private void AimInputClicked()
@@ -65,6 +70,11 @@ public class Player : MonoBehaviour
         _inventory.FireCurrentActiveWeapon();
     }
 
+    public void MoveCameraDirrection(string Direction)
+    {
+        //_viewCamera.MoveCamera(Direction, );
+    }
+
     private void AimInputUpdated(Vector2 inputVal)
     {
 
@@ -74,29 +84,6 @@ public class Player : MonoBehaviour
     private void MoveInputUpdated(Vector2 inputVal)
     {
         _moveInput = inputVal;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        switch(other.name)
-        {
-            case "DoorN":
-                Debug.Log("Move Camera North of Room x Meters");
-                //Destroy(other);
-                break;
-            case "DoorS":
-                Debug.Log("Move Camera South of Room x Meters");
-                //Destroy(other);
-                break;
-            case "DoorW":
-                Debug.Log("Move Camera West of Room x Meters");
-                //Destroy(other);
-                break;
-            case "DoorE":
-                Debug.Log("Move Camera East of Room x Meters");
-                //Destroy(other);
-                break;
-        }
     }
 
     // Update is called once per frame
