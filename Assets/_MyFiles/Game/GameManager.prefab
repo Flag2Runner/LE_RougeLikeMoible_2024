@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currrentWorldName: Basement
-  size: {x: 3, y: 3}
+  size: {x: 10, y: 10}
   startPos: 0
   room: {fileID: 2297704245558318784, guid: 68f19fa9309fa944899a375933b5aad8, type: 3}
   offset: {x: 18, y: 10.5}

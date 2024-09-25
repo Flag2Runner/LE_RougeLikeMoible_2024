@@ -19,12 +19,6 @@ public class Room : MonoBehaviour
     [SerializeField] private string roomName = "Room";
     [SerializeField] private int height, width;
     [SerializeField] private Vector2 roomLocation = Vector2.zero;
-    [SerializeField] private GameObject cameraTarget;
-
-    public GameObject GetCameraTarget()
-    {
-        return cameraTarget;
-    }
 
     public Vector2 GetRoomLocation()
     {
@@ -33,7 +27,6 @@ public class Room : MonoBehaviour
 
     public void UpdateRoom(bool[] keepDoor)
     {
-        if (keepDoor.Length != wallsDoors.Length) return;
         
         for (int i = 0; i < wallsDoors.Length; i++)
         {

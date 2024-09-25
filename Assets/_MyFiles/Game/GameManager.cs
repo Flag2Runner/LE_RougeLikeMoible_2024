@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _roomManager = GetComponent<RoomManager>();
+        _roomManager.StartAlgorithim();
         CreatePlayer();
         
     }

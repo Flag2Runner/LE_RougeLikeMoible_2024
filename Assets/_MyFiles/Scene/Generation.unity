@@ -444,22 +444,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 3059818061973035416, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
-      propertyPath: room
-      value: 
-      objectReference: {fileID: 2297704245558318784, guid: 68f19fa9309fa944899a375933b5aad8, type: 3}
-    - target: {fileID: 3059818061973035416, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
-      propertyPath: size.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3059818061973035416, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
-      propertyPath: size.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3059818061973035416, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
-      propertyPath: offset.y
-      value: 10.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6786406575157190802, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

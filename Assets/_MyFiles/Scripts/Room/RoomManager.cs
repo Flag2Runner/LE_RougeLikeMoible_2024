@@ -21,27 +21,25 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Vector2 offset;
 
     private List<Cell> dungeon;
-    private void Start()
-    {
-        Algorithim();
-    }
-    
-
     private void GenterateDungeon()
     {
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
-                var newRoom = Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<Room>();
-                newRoom.UpdateRoom(dungeon[Mathf.FloorToInt(i+j*size.x)].bKeepDoor);
+                Cell currentCell = dungeon[Mathf.FloorToInt(i + j * size.x)];
+                if (currentCell.bIsVisited)
+                {
+                    var newRoom = Instantiate(room, new Vector3(-i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<Room>();
+                    newRoom.UpdateRoom(currentCell.bKeepDoor);
                 
-                newRoom.name += $" {i}-{j}";
+                    newRoom.name += $" {i}-{j}";
+                }
             }
         }
     }
 
-    private void Algorithim()
+    public void StartAlgorithim()
     {
         dungeon = new List<Cell>();
 
@@ -63,7 +61,12 @@ public class RoomManager : MonoBehaviour
         {
             k++;
             dungeon[currentCell].bIsVisited = true;
-            
+
+            if (currentCell == dungeon.Count - 1)
+            {
+                break;
+            }
+
             //Check the cell's neighbors
             List<int> neighbors = CheckNeighbors(currentCell);
 
@@ -73,10 +76,9 @@ public class RoomManager : MonoBehaviour
                 {
                     break;
                 }
-                else
-                {
-                    currentCell = path.Pop();
-                }
+                
+                currentCell = path.Pop();
+                
             }
             else
             {
