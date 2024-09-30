@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [Serializable]
 public class WallDoor
@@ -12,13 +14,13 @@ public class WallDoor
 public class Room : MonoBehaviour
 {
     [SerializeField] private WallDoor[] wallsDoors;
-    private WallDoor[] _wallDoors = new WallDoor[4];
     
 
     public WallDoor[] WallsDoors => wallsDoors;
     [SerializeField] private string roomName = "Room";
     [SerializeField] private int height, width;
     [SerializeField] private Vector2 roomLocation = Vector2.zero;
+    [SerializeField] private bool bIsPlayerInRoom;
 
     public Vector2 GetRoomLocation()
     {
@@ -30,20 +32,46 @@ public class Room : MonoBehaviour
         
         for (int i = 0; i < wallsDoors.Length; i++)
         {
-            wallsDoors[i].door.SetActive(keepDoor[i]);
-            wallsDoors[i].wall.SetActive(!keepDoor[i]);
+            WallsDoors[i].door.SetActive(keepDoor[i]);
+            WallsDoors[i].wall.SetActive(!keepDoor[i]);
+            WallsDoors[i].door.GetComponent<Door>().SetIsColliderEnabled(keepDoor[i]);
+        }
+
+    }
+    public void UpdateCollision()
+    {
+            for (int i = 0; i < wallsDoors.Length; i++)
+            {
+                WallsDoors[i].door.GetComponent<Door>().SetIsColliderEnabled(bIsPlayerInRoom);
+            }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Player(Clone)")
+        {
+            bIsPlayerInRoom = true;
+            StartCoroutine(WaitOnPlayer());
+            UpdateCollision();
+            Debug.Log("Entered Room Trigger!!!");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Player(Clone)")
+        {
+            bIsPlayerInRoom = false;
+            StartCoroutine(WaitOnPlayer());
+            UpdateCollision();
+            Debug.Log("Exited Room Trigger!!!");
         }
 
     }
 
-    public Vector3 GetRoomCenter()
+    IEnumerator WaitOnPlayer()
     {
-        return new Vector2(roomLocation.x * width, roomLocation.y * height);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color =Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3(width, 2, height));
+        yield return new WaitForSeconds(1.5f);
     }
 }

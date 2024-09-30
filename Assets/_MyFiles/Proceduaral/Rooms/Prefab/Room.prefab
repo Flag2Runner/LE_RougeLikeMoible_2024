@@ -1430,6 +1430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7861010375884177653}
   - component: {fileID: 1294356363346620841}
+  - component: {fileID: 2041986786662448980}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -1481,6 +1482,28 @@ MonoBehaviour:
   height: 10
   width: 17
   roomLocation: {x: 18, y: 10.5}
+  bIsPlayerInRoom: 0
+--- !u!65 &2041986786662448980
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297704245558318784}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 14.856287, y: 3.509999, z: 8.612928}
+  m_Center: {x: -0.033367872, y: 1.2549998, z: 0.0021441777}
 --- !u!1 &2413577834818714830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,8 +2495,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4080149, y: 2.2950895, z: 0.5982738}
-  m_Center: {x: -5.961542e-17, y: 1.1481464, z: -0.025197266}
+  m_Size: {x: 1.4080149, y: 2.2950895, z: 0.11107117}
+  m_Center: {x: 2.915949e-16, y: 1.1481464, z: 0.19071035}
 --- !u!114 &2855695456739236705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2487,6 +2510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDirection: West
+  bisColliderEnabled: 0
 --- !u!1 &3650894469410523086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,8 +2619,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4080144, y: 2.2950895, z: 0.8462991}
-  m_Center: {x: 0, y: 1.1481464, z: 0.0036849827}
+  m_Size: {x: 1.4080144, y: 2.2950895, z: 0.10174513}
+  m_Center: {x: 0, y: 1.1481464, z: -0.19268632}
 --- !u!114 &199957576827680335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2610,6 +2634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDirection: North
+  bisColliderEnabled: 0
 --- !u!1 &3805137312212439426
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,8 +2915,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4080149, y: 2.2950895, z: 0.5259654}
-  m_Center: {x: -0.00000049670535, y: 1.1481464, z: 0.041165464}
+  m_Size: {x: 1.4080149, y: 2.2950895, z: 0.08590537}
+  m_Center: {x: -0.00000049670535, y: 1.1481464, z: -0.17678727}
 --- !u!114 &8907652731842140824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2905,6 +2930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDirection: East
+  bisColliderEnabled: 0
 --- !u!1 &4108272330311359081
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,8 +5320,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4080144, y: 2.2950895, z: 0.6460762}
-  m_Center: {x: 0, y: 1.1481464, z: 0.07749319}
+  m_Size: {x: 1.4080144, y: 2.2950895, z: 0.16783038}
+  m_Center: {x: 0, y: 1.1481464, z: 0.24461646}
 --- !u!114 &7527178340313393226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5309,6 +5335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDirection: South
+  bisColliderEnabled: 0
 --- !u!1 &9094203400140652341
 GameObject:
   m_ObjectHideFlags: 0

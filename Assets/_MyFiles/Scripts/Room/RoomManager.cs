@@ -18,9 +18,16 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Vector2 size;
     [SerializeField] private int startPos;
     [SerializeField] private GameObject room;
-    [SerializeField] private Vector2 offset;
+    [SerializeField] private GameObject roomHolder;
+    [SerializeField] private Vector2 offset = new(18f,10.5f);
 
     private List<Cell> dungeon;
+
+    public Vector2 GetOffset()
+    {
+        return offset;
+    }
+
     private void GenterateDungeon()
     {
         for (int i = 0; i < size.x; i++)
@@ -30,7 +37,7 @@ public class RoomManager : MonoBehaviour
                 Cell currentCell = dungeon[Mathf.FloorToInt(i + j * size.x)];
                 if (currentCell.bIsVisited)
                 {
-                    var newRoom = Instantiate(room, new Vector3(-i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<Room>();
+                    var newRoom = Instantiate(room, new Vector3(-i * offset.x, 0, -j * offset.y), Quaternion.identity, roomHolder.transform).GetComponent<Room>();
                     newRoom.UpdateRoom(currentCell.bKeepDoor);
                 
                     newRoom.name += $" {i}-{j}";

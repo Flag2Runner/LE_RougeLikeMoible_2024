@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     private void CreatePlayer()
     {
         if (!_player&& !player) { return; }
-        _player = Instantiate(player);
+        _player = Instantiate(player, transform, true);
         _player.transform.position = playerSpawnTarget.transform.position;
+        
     }
 }

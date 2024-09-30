@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private CharacterController _characterController;
     private ViewCamera _viewCamera;
     private InventoryComponent _inventory;
-    private RoomManager _roomManager;
+    private GameManager _gameManager;
     
     private Animator _animator;
     private float _animTurnSpeed;
@@ -47,12 +47,13 @@ public class Player : MonoBehaviour
        // _gamePlayWidget.ViewStick.OnInputUpdated += ViewInputUpdated;
         _viewCamera = Instantiate(viewCameraPrefab);
         _viewCamera.SetFollowParent(transform);
-            
+
     }
 
-    public void SetRoomManager(RoomManager roomManager)
+    private void Start()
     {
-        _roomManager = roomManager;
+        _gameManager = GetComponentInParent<GameManager>();
+        
     }
 
     private void AimInputClicked()
@@ -70,9 +71,9 @@ public class Player : MonoBehaviour
         _inventory.FireCurrentActiveWeapon();
     }
 
-    public void MoveCameraDirrection(string Direction)
+    public void MoveCameraDirrection(string direction)
     {
-        //_viewCamera.MoveCamera(Direction, );
+        _viewCamera.MoveCamera(direction, _gameManager.GetRoomManager().GetOffset());
     }
 
     private void AimInputUpdated(Vector2 inputVal)

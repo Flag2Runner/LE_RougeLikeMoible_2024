@@ -1,8 +1,5 @@
-using System;
-using System.Diagnostics;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
+
 [ExecuteAlways]
 
 public class ViewCamera : MonoBehaviour
@@ -28,22 +25,23 @@ public class ViewCamera : MonoBehaviour
             case "North":
                 directionValue.x = transform.position.x;
                 transform.Translate(LerpCamera(transform.position.z ,directionValue, CameraMoveLerpScale, true));
+                Debug.Log($"Moved camera {directionValue.y} North!!");
                 break;
             case "South":
                 directionValue.x = transform.position.x;
-                transform.Translate(LerpCamera(transform.position.z ,directionValue, CameraMoveLerpScale, true));
+                transform.Translate(LerpCamera(transform.position.z ,-directionValue, CameraMoveLerpScale, true));
+                Debug.Log($"Moved camera {-directionValue.y} South!!");
                 break;
             case "East":
                 directionValue.y = transform.position.z;
                 transform.Translate(LerpCamera(transform.position.x ,directionValue, CameraMoveLerpScale, false));
+                Debug.Log($"Moved camera {directionValue.x} East!!");
                 break;
             case "West":
                 directionValue.y = transform.position.z;
-                transform.Translate(LerpCamera(transform.position.x ,directionValue, CameraMoveLerpScale, false));
+                transform.Translate(LerpCamera(transform.position.x ,-directionValue, CameraMoveLerpScale, false));
+                Debug.Log($"Moved camera {-directionValue.x} West!!");
                 break;
-                
-                
-                
         }
     }
     
@@ -72,14 +70,14 @@ public class ViewCamera : MonoBehaviour
         if (direction)
         {
             Vector3 newPosition = transform.position;
-            newPosition.z =oldLocation + (newLocation.y - oldLocation) * time;
+            newPosition.z =oldLocation + (newLocation.y);
 
             return newPosition;
         }
         else
         {
             Vector3 newPosition = transform.position;
-            newPosition.x =oldLocation + (newLocation.x - oldLocation) * time;
+            newPosition.x =oldLocation + (newLocation.x);
 
             return newPosition;
         }
@@ -88,15 +86,15 @@ public class ViewCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        viewCamera.transform.position = pitchTransform.position - viewCamera.transform.forward * armLength;
+        //viewCamera.transform.position = pitchTransform.position - viewCamera.transform.forward * armLength;
     }
 
     private void LateUpdate()
     {
-        if (_parentTransform is null)
-            return;
+       // if (_parentTransform is null)
+         //   return;
         
-        transform.position = _parentTransform.position;
+       // transform.position = _parentTransform.position;
     }
 
     public void AddYawInput(float amt)
