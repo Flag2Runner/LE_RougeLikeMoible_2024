@@ -477,6 +477,14 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 3059818061973035416, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
+      propertyPath: size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059818061973035416, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
+      propertyPath: size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059818061973035416, guid: 3663a6a35ce0f61488249ec75a212387, type: 3}
       propertyPath: startPos
       value: 0
       objectReference: {fileID: 0}

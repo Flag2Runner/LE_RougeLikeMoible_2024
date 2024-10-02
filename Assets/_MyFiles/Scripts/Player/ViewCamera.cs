@@ -24,22 +24,22 @@ public class ViewCamera : MonoBehaviour
         {
             case "North":
                 directionValue.x = transform.position.x;
-                transform.position = CalculateNewPosition(transform.position.z ,directionValue.y, CameraMoveLerpScale, true);
+                transform.position = CalculateNewPosition(transform.position.z ,directionValue.y, true);
                 Debug.Log($"Moved camera {directionValue.y} North!!");
                 break;
             case "South":
                 directionValue.x = transform.position.x;
-                transform.position = CalculateNewPosition(transform.position.z ,-directionValue.y, CameraMoveLerpScale, true);
+                transform.position = CalculateNewPosition(transform.position.z ,-directionValue.y, true);
                 Debug.Log($"Moved camera {-directionValue.y} South!!");
                 break;
             case "East":
                 directionValue.y = transform.position.z;
-                transform.position = CalculateNewPosition(transform.position.x ,directionValue.x, CameraMoveLerpScale, false);
+                transform.position = CalculateNewPosition(transform.position.x ,directionValue.x, false);
                 Debug.Log($"Moved camera {directionValue.x} East!!");
                 break;
             case "West":
                 directionValue.y = transform.position.z;
-                transform.position = CalculateNewPosition(transform.position.x, -directionValue.x, CameraMoveLerpScale, false);
+                transform.position = CalculateNewPosition(transform.position.x, -directionValue.x, false);
                 Debug.Log($"Moved camera {-directionValue.x} West!!");
                 break;
             default:
@@ -68,7 +68,7 @@ public class ViewCamera : MonoBehaviour
         return GetViewRightDir() * input.x + GetViewUpDir() * input.y;
     }
 
-    private Vector3 CalculateNewPosition(float oldLocation, float newLocation, float time, bool direction)
+    private Vector3 CalculateNewPosition(float oldLocation, float newLocation, bool direction)
     {
         if (direction)
         {

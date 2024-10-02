@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(RoomManager))]
 public class GameManager : MonoBehaviour
 {
@@ -29,5 +30,27 @@ public class GameManager : MonoBehaviour
         _player = Instantiate(player, transform, true);
         _player.transform.position = playerSpawnTarget.transform.position;
         
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKeyDown(KeyCode.LeftShift)) 
+        {
+            Debug.Log("generate new dun");
+            SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("generate new dun");
+            SceneManager.LoadScene(1);
+        }
+
     }
 }

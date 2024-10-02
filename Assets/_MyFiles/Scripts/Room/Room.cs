@@ -22,7 +22,7 @@ public class Room : MonoBehaviour
     [SerializeField] private string roomName = "Room";
     [SerializeField] private Vector2 roomLocation = Vector2.zero;
     [SerializeField] private bool bIsPlayerInRoom;
-    [SerializeField] private float collisionWaitTime = 0.5f;
+    [SerializeField] private float collisionWaitTime = 0.1f;
     private void Start()
     {
         roomName = gameObject.name;
