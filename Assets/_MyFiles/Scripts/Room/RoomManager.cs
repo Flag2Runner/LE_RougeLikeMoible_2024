@@ -58,7 +58,7 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        int currentCell =   ;
+        int currentCell =   startPos;
 
         Stack<int> path = new Stack<int>();
 
