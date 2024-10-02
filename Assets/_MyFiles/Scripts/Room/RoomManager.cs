@@ -38,7 +38,7 @@ public class RoomManager : MonoBehaviour
                 if (currentCell.bIsVisited)
                 {
                     var newRoom = Instantiate(room, new Vector3(-i * offset.x, 0, -j * offset.y), Quaternion.identity, roomHolder.transform).GetComponent<Room>();
-                    newRoom.UpdateRoom(currentCell.bKeepDoor);
+                    newRoom.InitilizeRoom(currentCell.bKeepDoor);
                 
                     newRoom.name += $" {i}-{j}";
                 }

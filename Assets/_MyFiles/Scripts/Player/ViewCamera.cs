@@ -24,23 +24,26 @@ public class ViewCamera : MonoBehaviour
         {
             case "North":
                 directionValue.x = transform.position.x;
-                transform.Translate(LerpCamera(transform.position.z ,directionValue, CameraMoveLerpScale, true));
+                transform.position = CalculateNewPosition(transform.position.z ,directionValue.y, CameraMoveLerpScale, true);
                 Debug.Log($"Moved camera {directionValue.y} North!!");
                 break;
             case "South":
                 directionValue.x = transform.position.x;
-                transform.Translate(LerpCamera(transform.position.z ,-directionValue, CameraMoveLerpScale, true));
+                transform.position = CalculateNewPosition(transform.position.z ,-directionValue.y, CameraMoveLerpScale, true);
                 Debug.Log($"Moved camera {-directionValue.y} South!!");
                 break;
             case "East":
                 directionValue.y = transform.position.z;
-                transform.Translate(LerpCamera(transform.position.x ,directionValue, CameraMoveLerpScale, false));
+                transform.position = CalculateNewPosition(transform.position.x ,directionValue.x, CameraMoveLerpScale, false);
                 Debug.Log($"Moved camera {directionValue.x} East!!");
                 break;
             case "West":
                 directionValue.y = transform.position.z;
-                transform.Translate(LerpCamera(transform.position.x ,-directionValue, CameraMoveLerpScale, false));
+                transform.position = CalculateNewPosition(transform.position.x, -directionValue.x, CameraMoveLerpScale, false);
                 Debug.Log($"Moved camera {-directionValue.x} West!!");
+                break;
+            default:
+                Debug.Log($"No Direction {doorDirection} is not valid.");
                 break;
         }
     }
@@ -65,19 +68,21 @@ public class ViewCamera : MonoBehaviour
         return GetViewRightDir() * input.x + GetViewUpDir() * input.y;
     }
 
-    private Vector3 LerpCamera(float oldLocation, Vector2 newLocation, float time, bool direction)
+    private Vector3 CalculateNewPosition(float oldLocation, float newLocation, float time, bool direction)
     {
         if (direction)
         {
             Vector3 newPosition = transform.position;
-            newPosition.z =oldLocation + (newLocation.y);
+            newPosition.z =oldLocation + newLocation;
+            Debug.Log($"The new z pos is {newPosition}");
 
             return newPosition;
         }
         else
         {
             Vector3 newPosition = transform.position;
-            newPosition.x =oldLocation + (newLocation.x);
+            newPosition.x =oldLocation + newLocation;
+            Debug.Log($"The new x pos is {newPosition}");
 
             return newPosition;
         }
@@ -99,6 +104,6 @@ public class ViewCamera : MonoBehaviour
 
     public void AddYawInput(float amt)
     {
-        transform.Rotate(Vector3.up, amt * Time.deltaTime * cameraTurnSpeed);
+        //transform.Rotate(Vector3.up, amt * Time.deltaTime * cameraTurnSpeed);
     }
 }
